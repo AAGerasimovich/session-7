@@ -29,7 +29,18 @@ public class Producer implements Runnable {
         }
     }
 
-    private void generateJob() {
-        //TODO: здесь нужно сгенерировать новое задание!
+    private void generateJob() throws InterruptedException{
+
+
+        synchronized (store) {
+                    if (store.cnt < JobsStore.JOB_STORE_SIZE) {
+                        store.store[store.cnt++] = new Job(i);
+                        i++;
+
+                        store.notify();
+                    }
+
+
+        }
     }
 }

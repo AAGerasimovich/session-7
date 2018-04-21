@@ -7,9 +7,7 @@ import java.util.Set;
  */
 public class Consumer implements Runnable {
     public static final int JOB_EXECUTE_TIME = 2000;
-
     private final JobsStore store;
-
     private Set<Integer> doneJobs;
 
     public Consumer(JobsStore store, Set<Integer> doneJobs) {
@@ -32,10 +30,30 @@ public class Consumer implements Runnable {
         }
     }
 
-    private Job getJob() {
-        //TODO: Здесь нужно получить задание из store!
+    private Job getJob() throws InterruptedException {
 
-        return null;
+
+
+        synchronized (store) {
+
+            Job job = null;
+
+            if(store.cnt==0){
+                store.wait();
+            }
+
+            if (store.cnt>0) {
+                job = store.store[--store.cnt];
+
+            }
+
+            return job;
+
+
+            }
+
+
+
     }
 
     private void executeJob(Job job) throws InterruptedException {
