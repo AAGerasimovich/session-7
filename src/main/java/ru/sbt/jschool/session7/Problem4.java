@@ -32,14 +32,9 @@ public class Problem4 {
                             } catch (Exception e){
 
                             }
-
                         }
-
                     }
-
-
                 }
-
             });
         }
 
