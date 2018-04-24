@@ -1,16 +1,20 @@
 package ru.sbt.jschool.session7;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Problem1 {
 
 
 
-    static volatile int count = 50;
+    static volatile Integer count = 50;
+    static Collection<Runnable> taskList = new ArrayList<>();
     public static void main(String[] args) {
 
 
         Thread thread = threadProducer();
-
-
+        taskList.add(thread);
         thread.start();
 
     }
@@ -27,15 +31,24 @@ public class Problem1 {
                     return;
                 }
 
-                threadProducer().start();
+                Thread thread = threadProducer();
+                taskList.add(thread);
+                thread.start();
 
-                while (n!=count){
+                synchronized (taskList) {
+                    while (n != count) {
+                        try {
+                            taskList.wait();
+                        }catch (Exception e){}
+                    }
 
-                }
-                if (n==count) {
+                    if (n == count) {
                         System.out.println("Hello from Thread-" + n);
                         count--;
+                        taskList.notifyAll();
                         return;
+                    }
+
                 }
 
 
