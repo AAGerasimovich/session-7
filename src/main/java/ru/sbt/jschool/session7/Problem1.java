@@ -25,6 +25,7 @@ public class Problem1 {
             @Override
             public void run() {
 
+
                 int n = Integer.parseInt(Thread.currentThread().getName()
                         .substring(7, Thread.currentThread().getName().length()));
                 if (n==51){
