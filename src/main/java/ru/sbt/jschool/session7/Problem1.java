@@ -17,10 +17,11 @@ public class Problem1 {
 
             @Override
             public void run() {
-                int n = Integer.parseInt(Thread.currentThread().getName()
-                        .substring(7, Thread.currentThread().getName().length()));
-                System.out.println("Hello from Thread-" + n);
-                if (n==50){
+                int n = (50 - Integer.parseInt(Thread.currentThread().getName()
+                        .substring(7, Thread.currentThread().getName().length())));
+
+                System.out.println("Hello from Thread-" +  n);
+                if (n==0){
                     return;
                 }
                 threadProducer().start();
