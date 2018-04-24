@@ -22,13 +22,9 @@ public class Problem2 {
                             } catch (Exception e){
 
                             }
-
                         }
                     }
-
-
                 }
-
             });
         }
 
@@ -36,8 +32,6 @@ public class Problem2 {
         for (int i = 0; i < threads.length; i++) {
                 threads[i].start();
         }
-
-
     }
 
 }

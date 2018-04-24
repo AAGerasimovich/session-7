@@ -34,11 +34,8 @@ public class Problem3 {
                             } catch (Exception e){
 
                             }
-
                         }
                     }
-
-
                 }
 
             });
