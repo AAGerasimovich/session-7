@@ -2,6 +2,9 @@ package ru.sbt.jschool.session7;
 
 public class Problem1 {
 
+
+
+    static volatile int count = 50;
     public static void main(String[] args) {
 
 
@@ -17,13 +20,28 @@ public class Problem1 {
 
             @Override
             public void run() {
-                int n = 50 - Integer.parseInt(Thread.currentThread().getName()
+
+
+                int n = Integer.parseInt(Thread.currentThread().getName()
                         .substring(7, Thread.currentThread().getName().length()));
-                System.out.println("Hello from Thread-" + n);
-                if (n==0){
+                if (n==51){
                     return;
                 }
+
                 threadProducer().start();
+
+                while (n!=count){
+
+                }
+                if (n==count) {
+                        System.out.println("Hello from Thread-" + n);
+                        count--;
+                        return;
+                }
+
+
+
+
             }
 
         });
